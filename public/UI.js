@@ -17,5 +17,5 @@ calc.addEventListener('click',() => {
 
 function onDataReceived(data){
     let result = document.getElementById('res');
-    result.innerHTML = data;
+    result.innerHTML = data.data;
 }

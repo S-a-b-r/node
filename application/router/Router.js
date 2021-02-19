@@ -7,19 +7,19 @@ function Router({calc}){
     const answer = new Answer();
 
     router.get('/hello', (req, res) => {
-        res.send('Ты че делаеш?');
+        res.send(answer.good('Ты че делаеш?'));
     })
     
     router.get('/calc',(req, res) => {
         const {x1, y1, z1, x2, y2, z2} = req.query;
         let oper = req.query['operation'];
         switch(oper){
-            case '1': res.send( calc.vectMult(x1, y1, z1, x2, y2, z2));
-            case '2': res.send( calc.scalMult(x1, y1, z1, x2, y2, z2));
-            case '3': res.send( calc.plus(x1, y1, z1, x2, y2, z2));
-            case '4': res.send( calc.minus(x1, y1, z1, x2, y2, z2));
+            case '1': res.send( answer.good(calc.vectMult(x1, y1, z1, x2, y2, z2)));
+            case '2': res.send( answer.good(calc.scalMult(x1, y1, z1, x2, y2, z2)));
+            case '3': res.send( answer.good(calc.plus(x1, y1, z1, x2, y2, z2)));
+            case '4': res.send( answer.good(calc.minus(x1, y1, z1, x2, y2, z2)));
         }
-        res.send('error');
+        res.send(answer.bad('401'));
     })
     
     //app.all('/*', (req, res) => {
@@ -29,7 +29,7 @@ function Router({calc}){
     router.get('/add/:a/:b', (req, res) => {
         const { a, b } = req.params;
         console.log(a + " " + b);
-        res.send('' + ((a-0) + (b-0)));
+        res.send(answer.good('' + ((a-0) + (b-0)) ));
     })
 
     return router;

@@ -2,7 +2,9 @@ class Answer{
     
     ERROR = {
         404: 'Page not found',
-        900: 'undefined error'
+        900: 'undefined error',
+        5000: 'enter nickname and message',
+        5001: 'unacceptable length nickname or message',
     }
 
     good(data){

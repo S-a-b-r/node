@@ -2,12 +2,32 @@ const express = require('express');
 const Answer = require('./Answer');
 const router = express.Router();
 
-function Router({calc}){
+function Router({calc, chat}){
 
     const answer = new Answer();
 
     router.get('/hello', (req, res) => {
         res.send(answer.good('Ты че делаеш?'));
+    })
+
+    router.get('/sendmessage',(req, res)=>{
+        const nick = req.query['nick'];
+        const message = req.query['message'];
+        if(nick && message){
+            if((nick.length < 3)|| (nick.length>15) || (message.length > 30)){
+                res.send(answer.bad('5001'));
+            }
+            else if(nick == 'connect' && message == 'connect'){
+                res.send(answer.good(chat.updChat()));
+            }
+            else{
+                chat.addMessage(req.query['nick'], req.query['message']);
+                res.send(answer.good(chat.updChat()));
+            }
+        }
+        else{
+            res.send(answer.bad('5000'));
+        }
     })
     
     router.get('/calc',(req, res) => {

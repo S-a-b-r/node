@@ -53,7 +53,11 @@ function updChat(data){
 
 
 window.onload = function(){
+    const {HOST, PORT, MESSAGES} = SETTINGS;
+    
+    const socket = io("http://localhost:3001");
     const promise = sendMessage('connect', 'connect');
     promise.then(updChat);
 }
+
 
